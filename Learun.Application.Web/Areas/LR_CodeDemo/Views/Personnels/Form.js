@@ -24,19 +24,32 @@ var bootstrap = function ($, learun) {
                 var gender = learun.getIDCardGender($("#F_IDCardNo").val());
                 $("#F_Gender").lrselectSet(gender);
             })
+
+
         },
         initData: function () {
             if (!!keyValue) {
                 $.lrSetForm(top.$.rootUrl + '/LR_CodeDemo/Personnels/GetFormData?keyValue=' + keyValue, function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
-                            $('#' + id ).jfGridSet('refreshdata', data[id]);
+                            $('#' + id).jfGridSet('refreshdata', data[id]);
                         }
                         else {
                             $('[data-table="' + id + '"]').lrSetFormData(data[id]);
                         }
                     }
+                    var gender = learun.getIDCardGender($("#F_IDCardNo").val());
+                    $("#F_Gender").lrselectSet(gender);
+                    var age = learun.getIDCardAge($("#F_IDCardNo").val());
+                    $("#F_Age").val(age);
                 });
+
+                //setTimeout(function () {
+                //    var gender = learun.getIDCardGender($("#F_IDCardNo").val());
+                //    $("#F_Gender").lrselectSet(gender);
+                //    var age = learun.getIDCardAge($("#F_IDCardNo").val());
+                //    $("#F_Age").val(age);
+                //}, 1000);
             }
         }
     };
